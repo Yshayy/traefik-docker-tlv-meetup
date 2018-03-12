@@ -1,0 +1,27 @@
+version: '3.1'
+networks:
+  traefik-net: 
+    external:
+      name: traefik_net
+
+services:
+  cheddar:
+    image: errm/cheese:cheddar
+    networks:
+      - traefik-net
+    deploy:
+      replicas: 3
+      labels:
+        - traefik.frontend.rule=Host:cheese.swarm
+        - traefik.frontend.priority=2
+        - traefik.port=80
+
+  stilton:
+    image: errm/cheese:stilton
+    networks:
+      - traefik-net
+    deploy:
+      labels:
+        - traefik.frontend.rule=Host:cheese.swarm
+        - traefik.frontend.priority=3
+        - traefik.port=80
