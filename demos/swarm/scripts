@@ -1,9 +1,31 @@
+docker stack deploy -c 00.no-lb.yml cheeses
+http://cheeses.swarm:9090/
+http://cheeses.swarm:9091/
+docker stack rm cheeses
+
 docker stack deploy -c traefik.yml traefik
+http://dev.swarm:8080
+
 docker stack deploy -c 01.basic.yml cheeses
+http://cheddar.swarm
+http://stilton.swarm
+
 docker stack deploy -c 02.blue-green.yml cheeses
+http://cheese.swarm
+
 docker stack deploy -c 03.canary.yml cheeses
+http://cheese.swarm
+
 docker stack deploy -c 04.gateway.yml cheeses
+http://food.swarm/api/cheeses/cheddar/index.html
+http://food.swarm/api/cheeses/stilton/index.html
+
 docker stack deploy -c 05.min.yml cheeses
-docker stack deploy -c 06.failure.yml cheeses
-docker stack deploy -c 07.protected.yml cheeses
-docker stack deploy -c 08.rate-limiting.yml cheeses
+http://cheeses-cheddar.swarm
+http://cheeses-stilton.swarm
+
+# docker stack deploy -c 06.failure.yml cheeses
+# docker stack deploy -c 07.rate-limiting.yml cheeses
+# docker stack deploy -c 08.protected.yml cheeses
+
+http://dev.swarm:8080/metrics

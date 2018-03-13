@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  cheddar:
+    image: errm/cheese:cheddar
+    ports:
+      - 9090:80
+    deploy:
+      labels:
+        - traefik.frontend.rule=Host:food.swarm;PathPrefixStripRegex:/api/cheeses/cheddar
+        - traefik.port=80
+
+  stilton:
+    image: errm/cheese:stilton
+    ports:
+      - 9091:80
+    deploy:
+      labels:
+        - traefik.frontend.rule=Host:food.swarm;PathPrefixStripRegex:/api/cheeses/stilton
+        - traefik.port=80
